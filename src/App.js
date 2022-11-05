@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
-
+import React, { useState } from 'react';
+import MovieList from './Components/MovieList/MovieList';
+import AddFavourites from './Components/AddFavourites/AddFavourites';
 function App() {
+  const [value, setsearchValue] = useState('')
+  const [search, setSearch] = useState('')
+  const [add, setAdd] = useState([])
+  const setValue = (e) => {
+    setsearchValue(search)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='header'>
+        <p>Movies</p>
+        <div>
+          <input type="text" placeholder='search' onChange={(e) => { setSearch(e.target.value) }} />
+          <button onClick={(e) => setValue(e)}>Search</button>
+        </div>
+      </div>
+      <MovieList value={value} setAdd={setAdd} add={add} />
+      <div className='favour'>
+        <p>Favourites</p>
+      </div>
+      <AddFavourites add={add} setAdd={setAdd} />
     </div>
   );
 }
